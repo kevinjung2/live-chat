@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       flash[:message] = "Neither the username or password fields can be blank."
       redirect :'users/new'
     else
-      User.create(username: params[:username], password: params[:password])
+      user = User.create(username: params[:username], password: params[:password])
       redirect :"/users/#{user.id}"
     end
   end
