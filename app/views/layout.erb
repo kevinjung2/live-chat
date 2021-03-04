@@ -8,14 +8,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 
     <title>LiveChat</title>
-
+    <link rel="shortcut icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="/stylesheets/main.css" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
   </head>
   <body>
     <div class="wrapper">
+      <div class="container">
+        <header>
+          <div class="sign-on">
+            <%# <% if Helper.is_logged_in?(session) %><% if false %>
+              <a href="/logout">Logout</a>
+            <% else %>
+              <a href="/signup">Sign up</a>
+              |
+              <a href="/login">Log In</a>
+            <% end %>
+          </div>
+          <img src="images/logo-small.ico" class="img-responsive main-image">
+        </header>
 
+
+      </div>
         <%= yield %>
 
       <footer class="branding">
