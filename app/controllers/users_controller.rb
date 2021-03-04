@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   # GET: /users -friends page
   get "/users" do
-    @user = Helper.current_user
+    @user = Helper.current_user(session)
     @friends = @user.followers
     erb :"/users/index"
   end
@@ -16,8 +16,8 @@ class UsersController < ApplicationController
       flash[:message] = "There is no User with that username."
       redirect :'/users'
     else
-      Helper.current_user.followers << User.find_by(username: params[:username])
-      Helper.current_user.followed << User.find_by(username: params[:username])
+      Helper.current_user(session).followers << User.find_by(username: params[:username])
+      Helper.current_user(session).followed << User.find_by(username: params[:username])
       redirect :'/users'
   end
 
