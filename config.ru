@@ -4,7 +4,8 @@ require './config/environment'
 #   raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.'
 # end
 
-run ApplicationController
+
 use ConversationsController
 use MessagesController
 use UsersController
+run ApplicationController
