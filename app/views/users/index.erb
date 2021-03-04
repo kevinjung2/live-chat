@@ -1,1 +1,19 @@
-<h1>This is the Model's index page.</h1>
+<h1> <%= @user.username %>'s Friends: </h1>
+<% if @friends.size == 0 %>
+  <h2>looks like there's no one here right now :(. Add a friend Below!</h2>
+<% else %>
+  <% @friends.each do |friend| %>
+    <li><a class="friends-list" href="/users/<%=friend.id%>"><%=friend.username%></a></li>
+  <% end %>
+<% end %>
+<br>
+<br>
+
+<h2>Add a New Friend:</h2>
+
+<form action="/users/friend" method="post">
+  <label for="username">Friends Username:</label>
+  <input type="text" name="username">
+  <br>
+  <input type="submit" name="Add Friend">
+</form>

@@ -2,7 +2,14 @@ class UsersController < ApplicationController
 
   # GET: /users -friends page
   get "/users" do
-    erb :"/users/index.html"
+    @user = Helper.current_user
+    @friends = User.followers
+    erb :"/users/index"
+  end
+
+  #POST: /users/friend -adds a friend from respose in get /users
+  post '/users/friend' do
+
   end
 
   # GET: /users/new -also known as signup
