@@ -3,13 +3,22 @@ class UsersController < ApplicationController
   # GET: /users -friends page
   get "/users" do
     @user = Helper.current_user
-    @friends = User.followers
+    @friends = @user.followers
     erb :"/users/index"
   end
 
   #POST: /users/friend -adds a friend from respose in get /users
   post '/users/friend' do
-
+    if params[:username] == ""
+      flash[:message] = "Friends Username field must not be blank."
+      redirect :'/users'
+    elsif !User.find_by(username: params[:username])
+      flash[:message] = "There is no User with that username."
+      redirect :'/users'
+    else
+      Helper.current_user.followers << User.find_by(username: params[:username])
+      Helper.current_user.followed << User.find_by(username: params[:username])
+      redirect :'/users'
   end
 
   # GET: /users/new -also known as signup
