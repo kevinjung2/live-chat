@@ -12,7 +12,16 @@ class UsersController < ApplicationController
 
   # POST: /users -posts results from /users/new
   post "/users" do
-    redirect "/users"
+    if User.find_by(username: params[:username])
+      flash[:message] = "The username #{params[:username]} is already taked :( please choose a different one."
+      redirect :'/users/new'
+    elsif params[:username] == "" || params[:password] == ""
+      flash[:message] = "Neither the username or password fields can be blank."
+      redirect :'users/new'
+    else
+      User.create(username: params[:username], password: params[:password])
+      redirect :"/users/#{user.id}"
+    end
   end
 
   # GET: /users/5 -profile pages
