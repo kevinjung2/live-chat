@@ -2,14 +2,14 @@ class ConversationsController < ApplicationController
 
   # GET: /conversations -lists all current user conversations
   get "/conversations" do
-    @user = Helper.current_user
+    @user = Helper.current_user(session)
     @conversations = @user.conversations
     erb :"/conversations/index"
   end
 
   # GET: /conversations/new -shows form to create a new conversation with the new user and selected friends
   get "/conversations/new" do
-    @user = Helper.current_user
+    @user = Helper.current_user(session)
     @friends = @user.followers
     erb :"/conversations/new"
   end
@@ -25,8 +25,8 @@ class ConversationsController < ApplicationController
     else
       name = ""
       convo = Conversation.new
-      convo.users << Helper.current_user
-      name += Helper.current_user.username
+      convo.users << Helper.current_user(session)
+      name += Helper.current_user(session).username
       if params[:users][:username]
         params[:users][:username].each do |username|
           convo.users << User.find_by(username: username)
@@ -45,6 +45,7 @@ class ConversationsController < ApplicationController
 
   # GET: /conversations/5 -shows all the messages in a given conversation
   get "/conversations/:id" do
+    @user = Helper.current_user(session)
     @convo = Conversation.find_by(id: params[:id])
     @messages = @convo.messages
     erb :"/conversations/show"

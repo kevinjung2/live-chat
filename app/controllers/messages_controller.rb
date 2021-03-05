@@ -7,7 +7,24 @@ class MessagesController < ApplicationController
 
   # POST: /messages -posts new message created in /messages/new
   post "/messages" do
-    redirect "/messages"
+    convo = Conversation.find_by(id: params[:conversation])
+    user = User.find_by(id: session[:user_id])
+    if params[:user] != session[:user_id]
+      flash[:message] = "You can only send messages from yourself!"
+      redirect :"/conversations/#{convo.id}"
+    elsif !convo || !convo.users.include?(user)
+      flash[:message] = "You can only send messages to conversations youre apart of!"
+      redirect :"/users/#{session[:user_id]}"
+    elsif params[:message] == ""
+      flash[:message] = "You cannot send a blank message!"
+      redirect :"/conversations/#{convo.id}"
+    else
+      message = Message.create(content: params[:message])
+      message.user = user
+      message.conversation = convo
+      message.save
+      redirect :"conversations/#{convo.id}"
+    end
   end
 
   # GET: /messages/5/edit -allows the user to edit message they have already sent

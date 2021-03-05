@@ -8,7 +8,9 @@
   </div>
 <% end %>
 
-<form class="new-message" action="/message" method="post">
+<form class="new-message" action="/messages" method="post">
+  <input type="hidden" name="user" value="<%=@user.id%>">
+  <input type="hidden" name="conversation" value="<%=@convo.id%>">
   <input type="text" name="message" placeholder="Send a Message">
   <input type="submit" name="Send">
 </form>
