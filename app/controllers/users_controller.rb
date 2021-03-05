@@ -59,6 +59,9 @@ class UsersController < ApplicationController
 
   # DELETE: /users/5/delete - removes a user(can only be done by the logged in user)
   delete "/users/:id/delete" do
+    if Helper.current_user == User.find_by(id: params[:id])
+      Helper.current_user.destroy
+    end
     redirect "/users"
   end
 end
