@@ -16,7 +16,31 @@ class ConversationsController < ApplicationController
 
   # POST: /conversations -posts the new conversation from /conversations/new
   post "/conversations" do
-    redirect "/conversations"
+    if params[:users][:username].size == 0 && params[:newfriend][:username] == ""
+      flash[:message] = "You can't start a conversation with no-one!!"
+      redirect :'/conversations/new'
+    elsif params[:newfriend][:username] != "" && !User.find_by(username: params[:newfriend][:username])
+      flash[:message] = "The new friend you added does not exist!"
+      redirect :'/conversations/new'
+    else
+      name = ""
+      convo = Conversation.new
+      convo.users << Helper.current_user
+      name += Helper.current_user.username
+      if params[:users][:username]
+        params[:users][:username].each do |username|
+          convo.users << User.find_by(username: username)
+          name += username
+        end
+      end
+      if params[:newfriend][:username] != ""
+        convo.users << User.find_by(username: params[:newfriend][:username])
+        name += params[:newfriend][:username]
+      end
+      convo.name = name
+      convo.save
+      redirect "/conversations"
+    end
   end
 
   # GET: /conversations/5 -shows all the messages in a given conversation
