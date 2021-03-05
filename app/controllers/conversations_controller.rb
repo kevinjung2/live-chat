@@ -9,7 +9,9 @@ class ConversationsController < ApplicationController
 
   # GET: /conversations/new -shows form to create a new conversation with the new user and selected friends
   get "/conversations/new" do
-    erb :"/conversations/new.html"
+    @user = Helper.current_user
+    @friends = @user.followers
+    erb :"/conversations/new"
   end
 
   # POST: /conversations -posts the new conversation from /conversations/new
