@@ -2,7 +2,9 @@ class ConversationsController < ApplicationController
 
   # GET: /conversations -lists all current user conversations
   get "/conversations" do
-    erb :"/conversations/index.html"
+    @user = Helper.current_user
+    @conversations = @user.conversations
+    erb :"/conversations/index"
   end
 
   # GET: /conversations/new -shows form to create a new conversation with the new user and selected friends
