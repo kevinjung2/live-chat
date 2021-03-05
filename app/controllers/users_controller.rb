@@ -17,8 +17,9 @@ class UsersController < ApplicationController
       redirect :'/users'
     else
       Helper.current_user(session).followers << User.find_by(username: params[:username])
-      Helper.current_user(session).followed << User.find_by(username: params[:username])
+      User.find_by(username: params[:username]).followers << Helper.current_user(session)
       redirect :'/users'
+    end
   end
 
   # GET: /users/new -also known as signup
@@ -43,7 +44,7 @@ class UsersController < ApplicationController
 
   # GET: /users/5 -profile pages
   get "/users/:id" do
-    erb :"/users/show.html"
+    erb :"/users/show"
   end
 
   # GET: /users/5/edit -edit profile
