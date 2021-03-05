@@ -39,13 +39,15 @@ class ConversationsController < ApplicationController
       end
       convo.name = name
       convo.save
-      redirect "/conversations"
+      redirect "/conversations/#{convo.id}"
     end
   end
 
   # GET: /conversations/5 -shows all the messages in a given conversation
   get "/conversations/:id" do
-    erb :"/conversations/show.html"
+    @convo = Conversation.find_by(id: params[:id])
+    @messages = @convo.messages
+    erb :"/conversations/show"
   end
 
   # GET: /conversations/5/edit -shows the form to allow removal or addition of users to a conversation
