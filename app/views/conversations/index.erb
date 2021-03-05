@@ -1,9 +1,13 @@
 <h1><%=@user.username%>'s Conversations.</h1>
 <br>
-<% @conversations.each do |conversation| %>
-  <div class="convo-box">
-    <%= conversation.name %>
-    <%= conversation.messages.last %>
-    <%= conversation.edited_at%>
-  </div>
+<% if @conversations.size == 0 %>
+  <h1>You Have no Conversations :( <a href="/conversations/new">Start One Now!!</a></h1>
+<% else %>
+  <% @conversations.each do |conversation| %>
+    <div class="convo-box">
+      <%= conversation.name %>
+      <%= conversation.messages.last %>
+      <%= conversation.edited_at%>
+    </div>
+  <% end %>
 <% end %>
