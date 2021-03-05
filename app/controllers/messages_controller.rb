@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
   post "/messages" do
     convo = Conversation.find_by(id: params[:conversation])
     user = User.find_by(id: session[:user_id])
-    if params[:user] != session[:user_id]
+    if params[:user].to_i != session[:user_id]
       flash[:message] = "You can only send messages from yourself!"
       redirect :"/conversations/#{convo.id}"
     elsif !convo || !convo.users.include?(user)

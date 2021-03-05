@@ -2,8 +2,8 @@
 
 <form action="/conversations" method="post">
   <% @friends.each do |friend| %>
-    <label for="users[username]">friend.username</label>
-    <input type="checkbox" name="users[username][]" value="friend.username">
+    <label for="users[username]"><%=friend.username%></label>
+    <input type="checkbox" name="users[username][]" value="<%=friend.username%>">
   <% end unless @friends.size == 0 %>
   <label for="newfriend[username]">New Friend:</label>
   <input type="text" name="newfriend[username]">

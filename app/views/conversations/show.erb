@@ -2,8 +2,12 @@
 <br>
 <% @messages.each do |message| %>
   <div class="message">
-    <%= message.content %>
-    <%= message.user.username %>
+    <%= message.content %> |
+    <% if message.user == @user %>
+      Me |
+    <% else %>
+      <%= message.user.username %> |
+    <% end %>
     <%= message.created_at %>
   </div>
 <% end %>

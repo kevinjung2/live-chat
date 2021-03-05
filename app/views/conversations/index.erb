@@ -7,7 +7,7 @@
     <div class="convo-box">
       <%= conversation.name %>
       <%= conversation.messages.last %>
-      <%= conversation.edited_at%>
+      <%= conversation.updated_at if conversation.updated_at %>
     </div>
   <% end %>
 <% end %>
