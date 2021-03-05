@@ -2,9 +2,11 @@
 <% if @friends.size == 0 %>
   <h2>looks like there's no one here right now :(. Add a friend Below!</h2>
 <% else %>
-  <% @friends.each do |friend| %>
-    <li><a class="friends-list" href="/users/<%=friend.id%>"><%=friend.username%></a></li>
-  <% end %>
+  <div class="left-window">
+    <% @friends.each do |friend| %>
+      <li><a class="friends-list" href="/users/<%=friend.id%>"><%=friend.username%></a></li>
+    <% end %>
+  </div>
 <% end %>
 <br>
 <br>
