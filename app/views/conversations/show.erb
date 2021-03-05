@@ -1,20 +1,23 @@
-<h1><%=@convo.name%></h1>
+<script src="/javasripts/sticky-header.js"></script>
+<h1 id="message-header"><%=@convo.name%></h1>
 <br>
-<% @messages.each do |message| %>
-  <div class="message">
-    <%= message.content %> |
-    <% if message.user == @user %>
-      Me |
-    <% else %>
-      <%= message.user.username %> |
-    <% end %>
-    <%= message.created_at %>
-  </div>
-<% end %>
-
+<div id="message-thread">
+  <% @messages.each do |message| %>
+    <div class="message">
+      <div class="message-content"><%= message.content %></div>
+      <div class="message-user"><% if message.user == @user %>
+        Me
+      <% else %>
+        <%= message.user.username %>
+      <% end %></div>
+      <div class="message-time"><%= message.created_at %></div>
+    </div>
+    <br>
+  <% end %>
+</div>
 <form class="new-message" action="/messages" method="post">
   <input type="hidden" name="user" value="<%=@user.id%>">
   <input type="hidden" name="conversation" value="<%=@convo.id%>">
-  <input type="text" name="message" placeholder="Send a Message">
-  <input type="submit" name="Send">
+  <input id="message-bar" type="text" name="message" placeholder="Send a Message">
+  <input id="send" type="submit" name="Send" value="Send">
 </form>

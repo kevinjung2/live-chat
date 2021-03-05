@@ -21,6 +21,7 @@
   }
 
   header {
+    z-index: 12;
     margin: auto;
     width: 85%;
     box-shadow: 2px 2px 6px;
@@ -37,6 +38,10 @@
     background: #6F2232;
   }
 
+  .messages {
+    margin-bottom: 300px;
+  }
+
   .left-window {
     box-shadow: 3px 6px;
     padding: 20px;
@@ -46,6 +51,96 @@
     margin-right: auto;
     background-color: #4E4E50;
     text-align: center;
+  }
+
+  .message-content {
+    position: absolute;
+    width: 78%;
+    font-weight: 300;
+    text-align: left;
+    font-size: 40px;
+    float: left;
+    /* padding: 10px; */
+    line-height: 50px;
+  }
+
+  .message-user {
+    position: relative;
+    width: 20%;
+    margin-left: auto;
+    margin-top: 5%;
+    margin-bottom: auto;
+    font-weight: 400;
+    text-align: right;
+    font-size: 40px;
+    padding: 10px;
+  }
+
+  .message-time {
+    position: relative;
+    width: 30%;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: 5%;
+    font-weight: 200;
+    text-align: right;
+    font-size: 25px;
+    padding: 10px;
+  }
+
+  .message {
+    position: relative;
+    /* bottom: 20%; */
+    border-top: 2px black solid;
+    border-bottom: 2px black solid;
+  }
+
+  .new-message {
+    box-shadow: 0px -4px 6px;
+    padding: 1px;
+    background: black;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+  #message-header {
+    /* position: fixed; */
+    width: 100%;
+    /* top: 5; */
+    background: #4E4E50;
+    z-index: 10;
+  }
+
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%
+  }
+
+  .sticky + #message-thread {
+  padding-top: 102px;
+  }
+
+  #message-thread {
+    margin-top: 100px;
+  }
+
+  #message-bar {
+    float: left;
+    width: 90%;
+    height: 50px;
+    font-size: 20px;
+    outline: black 2px solid;
+  }
+
+  #send {
+    float: right;
+    width: 9%;
+    height: 54px;
+    font-size: 20px;
+    outline: black 2px solid;
   }
 
   .right-window {
@@ -82,6 +177,7 @@
   }
 
   a {
+    z-index: 13;
     color: #C3073F;
   }
 
