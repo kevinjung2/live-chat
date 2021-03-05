@@ -61,7 +61,11 @@ class UsersController < ApplicationController
   delete "/users/:id/delete" do
     if Helper.current_user == User.find_by(id: params[:id])
       Helper.current_user.destroy
+      session.clear
+      redirect :'/login'
+    else
+      flash[:message] = "You can only delete your own account"
+      redirect "/users"
     end
-    redirect "/users"
   end
 end
