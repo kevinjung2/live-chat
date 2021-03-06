@@ -45,13 +45,19 @@ class UsersController < ApplicationController
   # GET: /users/5 -profile pages
   get "/users/:id" do
     redirect_if_not_logged_in
-    if params[:id] == current_user.id
+    if params[:id].to_i == current_user.id
       @friends = current_user.followers
       @conversations = current_user.conversations
       erb :"/users/show"
+    elsif !User.find_by(id: params[:id])
+      flash[:message] = "User does not exist"
+      redirect :"/users/#{current_user.id}"
     elsif User.find_by(id: params[:id]).followers.include?(current_user)
+      @user = User.find_by(id: params[:id])
+      @friends = @user.followers
       erb :'users/friends'
     else
+      @user = User.find_by(id: params[:id])
       erb :'users/not_friends'
     end
   end

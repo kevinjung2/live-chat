@@ -3,19 +3,21 @@
   <h2>looks like there's no one here right now :(. Add a friend Below!</h2>
 <% else %>
   <div class="left-window">
+    <br>
     <% @friends.each do |friend| %>
       <li><a class="friends-list" href="/users/<%=friend.id%>"><%=friend.username%></a></li>
+      <br>
     <% end %>
   </div>
 <% end %>
 <br>
 <br>
+<div class="right-window">
+  <h2>Add a New Friend:</h2>
 
-<h2>Add a New Friend:</h2>
-
-<form action="/users/friend" method="post">
-  <label for="username">Friends Username:</label>
-  <input type="text" name="username">
-  <br>
-  <input type="submit" name="Add Friend">
-</form>
+  <form action="/users/friend" method="post">
+    <label for="username">Friends Username:</label>
+    <input type="text" name="username">
+    <input type="submit" name="Add Friend">
+  </form>
+</div>

@@ -50,7 +50,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def redirect_if_logged_in
-      redirect :"/conversations" if is_logged_in?
+      redirect :"/users/#{current_user.id}" if is_logged_in?
     end
 
     def redirect_if_not_logged_in

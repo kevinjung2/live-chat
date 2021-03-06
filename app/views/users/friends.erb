@@ -1,0 +1,9 @@
+<h2><%=@user.username%>'s Profile Page :).</h2>
+<div class="left-pannel">
+    <a class="profile-titles" href="/users">Friends</a>
+    <br>
+    <% @friends.each do |friend| %>
+      <br>
+      <li><a href="/users/<%=friend.id%>"><%=friend.username%></a></li>
+    <% end %>
+</div>

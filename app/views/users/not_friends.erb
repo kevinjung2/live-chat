@@ -1,0 +1,10 @@
+<h2><%=@user.username%>'s Profile Page :).</h2>
+<br>
+<div class="center-window"
+  <h3>Looks like you and <%=@user.username%> aren't friends!</h3>
+  <h3>add them now?</h3>
+  <form action="/users/friend" method="post">
+    <input type="hidden" name="username" value="<%=@user.username%>">
+    <input type="submit" name="Add Friend" value="Add Friend">
+  </form>
+</div>
