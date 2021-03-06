@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   # GET: /users -friends page
   get "/users" do
-    @user = Helper.current_user(session)
+    @user = current_user
     @friends = @user.followers
     erb :"/users/index"
   end
@@ -16,8 +16,8 @@ class UsersController < ApplicationController
       flash[:message] = "There is no User with that username."
       redirect :'/users'
     else
-      Helper.current_user(session).followers << User.find_by(username: params[:username])
-      User.find_by(username: params[:username]).followers << Helper.current_user(session)
+      current_user.followers << User.find_by(username: params[:username])
+      User.find_by(username: params[:username]).followers << current_user
       redirect :'/users'
     end
   end
@@ -59,8 +59,8 @@ class UsersController < ApplicationController
 
   # DELETE: /users/5/delete - removes a user(can only be done by the logged in user)
   delete "/users/:id/delete" do
-    if Helper.current_user == User.find_by(id: params[:id])
-      Helper.current_user.destroy
+    if current_user == User.find_by(id: params[:id])
+      current_user.destroy
       session.clear
       redirect :'/login'
     else

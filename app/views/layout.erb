@@ -19,7 +19,7 @@
       <div class="container">
         <header>
           <div class="sign-on">
-            <% if Helper.is_logged_in?(session) %>
+            <% if is_logged_in? %>
               <a href="/logout">Logout</a>
             <% else %>
               <a href="/signup">Sign up</a>

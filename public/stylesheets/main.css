@@ -106,11 +106,12 @@
   }
 
   #message-header {
-    /* position: fixed; */
+    font-size: 40px;
+    line-height: 60px;
     width: 100%;
-    /* top: 5; */
     background: #4E4E50;
     z-index: 10;
+    box-shadow: 0px 5px 5px;
   }
 
   .sticky {

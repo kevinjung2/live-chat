@@ -11,10 +11,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
+    redirect_if_logged_in
     erb :welcome
   end
 
   get '/login' do
+    redirect_if_logged_in
     erb :'login'
   end
 
@@ -35,5 +37,21 @@ class ApplicationController < Sinatra::Base
   get '/logout' do
     session.clear
     redirect :'/login'
+  end
+
+  helpers do
+
+    def is_logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      User.find_by(id: session[:user_id])
+    end
+
+    def redirect_if_logged_in
+      redirect :"conversations" if is_logged_in?
+    end
+
   end
 end
