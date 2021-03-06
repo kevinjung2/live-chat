@@ -2,6 +2,7 @@ class ConversationsController < ApplicationController
 
   # GET: /conversations -lists all current user conversations
   get "/conversations" do
+    redirect_if_not_logged_in
     @user = current_user
     @conversations = @user.conversations
     erb :"/conversations/index"
@@ -9,6 +10,7 @@ class ConversationsController < ApplicationController
 
   # GET: /conversations/new -shows form to create a new conversation with the new user and selected friends
   get "/conversations/new" do
+    redirect_if_not_logged_in
     @user = current_user
     @friends = @user.followers
     erb :"/conversations/new"
@@ -45,6 +47,7 @@ class ConversationsController < ApplicationController
 
   # GET: /conversations/5 -shows all the messages in a given conversation
   get "/conversations/:id" do
+    redirect_if_not_logged_in
     @user = current_user
     @convo = Conversation.find_by(id: params[:id])
     @messages = @convo.messages
