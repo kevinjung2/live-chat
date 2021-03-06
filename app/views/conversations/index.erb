@@ -1,7 +1,9 @@
 <h1><%=@user.username%>'s Conversations.</h1>
 <br>
 <% if @conversations.size == 0 %>
-  <h1>You Have no Conversations :( <a href="/conversations/new">Start One Now!!</a></h1>
+  <div class="center-window">
+      <h3>You Have no Conversations :( <a href="/conversations/new">Start One Now!!</a></h3>
+  </div>
 <% else %>
   <% @conversations.each do |conversation| %>
     <div class="convo-box">
