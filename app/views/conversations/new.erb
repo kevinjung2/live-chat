@@ -1,12 +1,19 @@
-<h1>Create a New Conversation.</h1>
+<br>
+<br>
 
-<form action="/conversations" method="post">
-  <% @friends.each do |friend| %>
-    <label for="users[username]"><%=friend.username%></label>
-    <input type="checkbox" name="users[username][]" value="<%=friend.username%>">
-  <% end unless @friends.size == 0 %>
-  <label for="newfriend[username]">New Friend:</label>
-  <input type="text" name="newfriend[username]">
-  <h3 id="newfriend">*Warning* Starting a conversation with someone who isn't your friend will make them your friend.</h3>
-  <input type="submit" name="Start Conversation">
-</form>
+<div class="center-window">
+  <h2>Create a New Conversation.</h2>
+
+  <form action="/conversations" method="post">
+    <br>
+    <% @friends.each do |friend| %>
+      <label for="users[username]"><%=friend.username%></label>
+      <input type="checkbox" name="users[username][]" value="<%=friend.username%>">
+      <br>
+    <% end unless @friends.size == 0 %>
+    <label for="newfriend[username]">New Friend:</label>
+    <input type="text" name="newfriend[username]">
+    <h3 id="newfriend">*Warning* Starting a conversation with someone who isn't your friend will make them your friend.</h3>
+    <input type="submit" name="Start Conversation">
+  </form>
+</div>
