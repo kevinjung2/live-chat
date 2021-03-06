@@ -44,7 +44,16 @@ class UsersController < ApplicationController
 
   # GET: /users/5 -profile pages
   get "/users/:id" do
-    erb :"/users/show"
+    redirect_if_not_logged_in
+    if params[:id] == current_user.id
+      @friends = current_user.followers
+      @conversations = current_user.conversations
+      erb :"/users/show"
+    elsif User.find_by(id: params[:id]).followers.include?(current_user)
+      erb :'users/friends'
+    else
+      erb :'users/not_friends'
+    end
   end
 
   # GET: /users/5/edit -edit profile

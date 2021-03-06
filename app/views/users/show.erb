@@ -1,1 +1,13 @@
-<h1><%=current_user.username%>'s Profile Page :).</h1>
+<h2><%=current_user.username%>'s Profile Page :).</h2>
+<div class="left-pannel">
+    <a class="profile-titles" href="/users">Friends</a>
+    <% @friends.each do |friend| %>
+      <li><a href="/users/<%=friend.id%>"><%=friend.username%></a></li>
+    <% end %>
+</div>
+<div class="right-pannel">
+    <a class="profile-titles" href="/conversations">Conversations</a>
+    <% @conversations.each do |convo| %>
+      <li><a href="/conversations/<%=convo.id%>"><%=convo.name%></a></li>
+    <% end %>
+</div>
