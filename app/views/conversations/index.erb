@@ -6,10 +6,23 @@
   </div>
 <% else %>
   <% @conversations.each do |conversation| %>
-    <div class="convo-box">
-      <%= conversation.name %>
-      <%= conversation.messages.last %>
-      <%= conversation.updated_at if conversation.updated_at %>
+    <div class="message">
+      <div class="message-content">
+        <a href="/conversations/<%=conversation.id%>"><%= conversation.name %></a>
+      </div>
+      <div class="last-message">
+        <%= conversation.messages.last.content %>
+      </div>
+      <div class="message-time">
+        <%= conversation.updated_at if conversation.updated_at %>
+      </div>
+      <a class="left-pannel" href="/conversations/<%=conversation.id%>/edit">Edit Conversation</a>
+      <form action="/conversations/<%=conversation.id%>/delete" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <div class="right-pannel">
+          <input type="submit" name="Delete" value="Delete Conversation">
+        </div>
+      </form>
     </div>
   <% end %>
 <% end %>
