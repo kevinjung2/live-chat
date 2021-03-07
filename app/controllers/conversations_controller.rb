@@ -76,13 +76,11 @@ class ConversationsController < ApplicationController
   patch "/conversations/:id" do
     convo = Conversation.find_by(id: params[:id])
     if convo.users.include?(current_user)
-      if params[:name] = ""
+      if params[:name] == ""
         flash[:message] = "Conversation name can not be blank."
-        binding.pry
         redirect :"/conversations"
       elsif params[:users][:username].empty?
         flash[:message] = "Your conversation must have at least one user!"
-        binding.pry
         redirect :"/conversations"
       else
         users = params[:users][:username].map {|user| User.find_by(username: user)}
