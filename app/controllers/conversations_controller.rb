@@ -29,14 +29,17 @@ class ConversationsController < ApplicationController
       convo = Conversation.new
       convo.users << current_user
       name += current_user.username
-      if params[:users][:username]
+      if params[:users]
         params[:users][:username].each do |username|
           convo.users << User.find_by(username: username)
           name += ", #{username}"
         end
       end
       if params[:newfriend][:username] != ""
-        convo.users << User.find_by(username: params[:newfriend][:username])
+        new_friend = User.find_by(username: params[:newfriend][:username])
+        convo.users << new_friend
+        current_user.followers << new_friend
+        new_friend.followers << current_user
         name += ", #{params[:newfriend][:username]}"
       end
       convo.name = name
