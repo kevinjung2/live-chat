@@ -1,1 +1,18 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<h1>Edit <%=@convo.name%></h1>
+
+<div class="center-window">
+  <form action="/conversations/<%=@convo.id%>" method="post">
+    <input type="hidden" name="_method" value="PATCH">
+    <h3>Conversation Name: </h3>
+    <br>
+    <input type="text" name="name" value="<%=@convo.name%>">
+    <br>
+    <h3>Conversation Members: </h3>
+    <% @members.each do |member| %>
+      <label for="users[username][]"><%=member.username%></label>
+      <input type="checkbox" name="users[username][]" value="<%=member.username%>" <%='checked' if @convo.users.include?(member)%>>
+      <br>
+    <% end %>
+    <input type="submit" name="Edit Conversation">
+  </form>
+</div>

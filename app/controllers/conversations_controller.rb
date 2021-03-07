@@ -51,17 +51,45 @@ class ConversationsController < ApplicationController
     @user = current_user
     @convo = Conversation.find_by(id: params[:id])
     @messages = @convo.messages
-    erb :"/conversations/show"
+    if @convo.users.include?(@user)
+      erb :"/conversations/show"
+    else
+      erb :'/conversations'
+    end
   end
 
   # GET: /conversations/5/edit -shows the form to allow removal or addition of users to a conversation
   get "/conversations/:id/edit" do
-    erb :"/conversations/edit.html"
+    @convo = Conversation.find_by(id: params[:id])
+    @members = @convo.users
+    if @members.include?(current_user)
+      erb :"/conversations/edit"
+    else
+      flash[:message] = "You can only edit conversations you are in!"
+      redirect :'/conversations'
+    end
   end
 
   # PATCH: /conversations/5 -patches the data from /conversations/:id/edit
   patch "/conversations/:id" do
-    redirect "/conversations/:id"
+    convo = Conversation.find_by(id: params[:id])
+    if convo.users.include?(current_user)
+      if params[:name] = ""
+        flash[:message] = "Conversation name can not be blank."
+        binding.pry
+        redirect :"/conversations"
+      elsif params[:users][:username].empty?
+        flash[:message] = "Your conversation must have at least one user!"
+        binding.pry
+        redirect :"/conversations"
+      else
+        users = params[:users][:username].map {|user| User.find_by(username: user)}
+        convo.update(name: params[:name], users: users)
+      end
+    else
+      flash[:message] = "You can only edit conversations you are in"
+      redirect :'/conversations'
+    end
   end
 
   # DELETE: /conversations/5/delete - removes a conversation(must be in the only user in conversation to delete it --otherwise should just edit and remove current user--)
