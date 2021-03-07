@@ -296,4 +296,10 @@
     border-top: 2px solid #ccc;
     padding: 0;
   }
+
+ .add {
+   position: relative;
+   float: right;
+   font-size: 30px
+ }
 /* } */
