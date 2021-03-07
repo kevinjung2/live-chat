@@ -94,6 +94,12 @@ class ConversationsController < ApplicationController
 
   # DELETE: /conversations/5/delete - removes a conversation(must be in the only user in conversation to delete it --otherwise should just edit and remove current user--)
   delete "/conversations/:id/delete" do
-    redirect "/conversations"
+    if Conversation.find_by(id: params[:id]).users.include?(current_user)
+      Conversation.find_by(id: params[:id]).destroy
+      redirect "/conversations"
+    else
+      flash[:message] = "You can only delete conversations you are a part of!"
+      redirect "/conversations"
+    end
   end
 end
