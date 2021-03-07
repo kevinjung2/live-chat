@@ -306,4 +306,14 @@
    float: right;
    font-size: 30px
  }
+
+ .delete {
+   padding: 2px;
+   border-radius: 15px;
+   background-color: black;
+   color: red;
+   position: relative;
+   float: right;
+   font-size: 17px
+ }
 /* } */

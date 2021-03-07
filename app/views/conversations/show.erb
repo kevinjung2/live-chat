@@ -5,22 +5,32 @@
 <br>
 <div id="message-thread">
   <% @messages.each do |message| %>
-   <div class="message">
-     <div class="message-content"><%= message.content %></div>
-     <div class="message-user"><% if message.user == @user %>
-         Me
-       <% else %>
-         <%= message.user.username %>
-       <% end %></div>
-       <div class="message-time"><%= message.created_at %></div>
-     </div>
-     <br>
-   <% end %>
+    <div class="message">
+      <div class="message-content"><%= message.content %></div>
+      <div class="message-user">
+        <% if message.user == @user %>
+          <form action="/messages/<%=message.id%>/delete" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="convo" value="<%=message.conversation.id%>">
+            <input type="hidden" name="message" value="<%=message.id%>">
+            <input class="delete" type="submit" name="Delete" value="Delete">
+          </form>
+          <br>
+          <br>
+          Me
+        <% else %>
+          <%= message.user.username %>
+        <% end %>
+      </div>
+      <div class="message-time"><%= message.created_at %></div>
+    </div>
+    <br>
+  <% end %>
 </div>
 <form class="new-message" action="/messages" method="post">
- <input type="hidden" name="user" value="<%=@user.id%>">
- <input type="hidden" name="conversation" value="<%=@convo.id%>">
- <input id="message-bar" type="text" name="message" placeholder="Send a Message">
- <input id="send" type="submit" name="Send" value="Send">
+  <input type="hidden" name="user" value="<%=@user.id%>">
+  <input type="hidden" name="conversation" value="<%=@convo.id%>">
+  <input id="message-bar" type="text" name="message" placeholder="Send a Message">
+  <input id="send" type="submit" name="Send" value="Send">
 </form>
 <script type="text/javascript" src="/javascripts/sticky-header.js"></script>

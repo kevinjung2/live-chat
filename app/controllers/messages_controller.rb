@@ -39,6 +39,11 @@ class MessagesController < ApplicationController
 
   # DELETE: /messages/5/delete -deletes a message (must be user that sent message to delete --possibly add the ability for conversation admins and let them delete as well)
   delete "/messages/:id/delete" do
-    redirect "/messages"
+    if current_user.messages.include?(Message.find_by(id: params[:message].to_i))
+      Message.find_by(id: params[:message].to_i).destroy
+    else
+      flash[:message] = "You can only delete your messages"
+    end
+    redirect :"/conversations/#{params[:convo]}"
   end
 end
