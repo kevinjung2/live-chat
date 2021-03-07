@@ -1,6 +1,9 @@
 <h1>Edit <%=@convo.name%></h1>
 
 <div class="center-window">
+  <% if flash[:message] %>
+    <h3 class="flash"><%= flash[:message] %></h3>
+  <% end %>
   <form action="/conversations/<%=@convo.id%>" method="post">
     <input type="hidden" name="_method" value="PATCH">
     <h3>Conversation Name: </h3>
