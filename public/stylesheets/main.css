@@ -304,16 +304,43 @@
  .add {
    position: relative;
    float: right;
-   font-size: 30px
+   font-size: 20px
  }
 
  .delete {
-   padding: 2px;
+   padding-top: 2px;
+   padding-bottom: 2px;
+   padding-left: 4px;
+   padding-right: 4px;
    border-radius: 15px;
    background-color: black;
    color: red;
    position: relative;
    float: right;
    font-size: 17px
+ }
+
+ .button {
+   border: outset;
+   top: 6px;
+   border-color: grey;
+   border-width: 2px;
+   height: 25px;
+   padding-left: 13px;
+   padding-right: 13px;
+   border-radius: 15px;
+   background-color: black;
+   color: red;
+   position: relative;
+   float: right;
+   font-size: 17px
+ }
+
+ a.edit {
+   line-height: 20px;
+   position: relative;
+   bottom: 5px;
+   text-decoration: none;
+   color: red;
  }
 /* } */

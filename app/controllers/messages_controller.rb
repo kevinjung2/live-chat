@@ -29,12 +29,27 @@ class MessagesController < ApplicationController
 
   # GET: /messages/5/edit -allows the user to edit message they have already sent
   get "/messages/:id/edit" do
-    erb :"/messages/edit.html"
+    @message = Message.find_by(id: params[:id])
+    if @message.user == current_user
+      erb :"/messages/edit"
+    else
+      flash[:message] = "You can only edit your messages"
+      redirect :"/conversations/#{@message.conversation.id}"
+    end
   end
 
   # PATCH: /messages/5 -patches changes from /messages/:id/edit
   patch "/messages/:id" do
-    redirect "/messages/:id"
+    message = Message.find_by(id: params[:id])
+    if params[:message] == ""
+      flash[:message] = "Message can not be blank."
+      redirect :"/messages/#{message.id}/edit"
+    elsif message.user != current_user
+      flash[:message] = "You can only edit your messages!"
+    else
+      message.update(content: params[:message])
+    end
+    redirect :"/conversations/#{message.conversation.id}"
   end
 
   # DELETE: /messages/5/delete -deletes a message (must be user that sent message to delete --possibly add the ability for conversation admins and let them delete as well)

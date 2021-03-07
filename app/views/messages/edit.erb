@@ -1,1 +1,13 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<br>
+<br>
+<div class="center-window">
+  <% if flash[:message] %>
+    <h3 class="flash"><%= flash[:message] %></h3>
+  <% end %>
+  <h2>Edit Message: </h2>
+  <form action="/messages/<%=@message.id%>" method="post">
+    <input type="hidden" name="_method" value="PATCH">
+    <input type="text" name="message" value="<%=@message.content%>">
+    <input type="submit" name="Edit Message" value="Edit Message">
+  </form>
+</div>

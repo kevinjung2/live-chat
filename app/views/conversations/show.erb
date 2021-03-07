@@ -9,6 +9,11 @@
       <div class="message-content"><%= message.content %></div>
       <div class="message-user">
         <% if message.user == @user %>
+          <div class="button">
+            <h3><a class="edit" href="/messages/<%=message.id%>/edit">Edit</a></h3>
+          </div>
+          <br>
+          <br>
           <form action="/messages/<%=message.id%>/delete" method="post">
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="convo" value="<%=message.conversation.id%>">
