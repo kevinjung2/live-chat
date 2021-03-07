@@ -18,7 +18,7 @@ class ConversationsController < ApplicationController
 
   # POST: /conversations -posts the new conversation from /conversations/new
   post "/conversations" do
-    if params[:users][:username].size == 0 && params[:newfriend][:username] == ""
+    if !params[:users] && params[:newfriend][:username] == ""
       flash[:message] = "You can't start a conversation with no-one!!"
       redirect :'/conversations/new'
     elsif params[:newfriend][:username] != "" && !User.find_by(username: params[:newfriend][:username])

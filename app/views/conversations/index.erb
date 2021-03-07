@@ -10,9 +10,11 @@
       <div class="message-content">
         <a href="/conversations/<%=conversation.id%>"><%= conversation.name %></a>
       </div>
-      <div class="last-message">
-        <%= conversation.messages.last.content %>
-      </div>
+      <% if conversation.messages.size > 0 %>
+        <div class="last-message">
+          <%= conversation.messages.last.content %>
+        </div>
+      <% end %>
       <div class="message-time">
         <%= conversation.updated_at if conversation.updated_at %>
       </div>

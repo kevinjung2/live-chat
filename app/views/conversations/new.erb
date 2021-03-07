@@ -3,6 +3,9 @@
 
 <div class="center-window">
   <h2>Create a New Conversation.</h2>
+  <% if flash[:message] %>
+    <h3 class="flash"><%= flash[:message] %></h3>
+  <% end %>
 
   <form action="/conversations" method="post">
     <br>
