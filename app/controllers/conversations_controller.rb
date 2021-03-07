@@ -54,7 +54,8 @@ class ConversationsController < ApplicationController
     if @convo.users.include?(@user)
       erb :"/conversations/show"
     else
-      erb :'/conversations'
+      flash[:message] = "You can only see conversations you are a part of"
+      redirect :'/conversations'
     end
   end
 
