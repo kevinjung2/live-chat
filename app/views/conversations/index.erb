@@ -8,16 +8,21 @@
 <% if flash[:message] %>
   <h3 class="flash"><%= flash[:message] %></h3>
 <% end %>
+  <div class="center-window">
+    <h3>Start a new conversation <a href="/conversations/new">Here.</a></h3>
+  </div>
+  <br>
+  <br>
   <% @conversations.each do |conversation| %>
     <div class="message">
       <div class="button">
-        <h3><a class="edit" href="/conversations/<%=conversation.id%>/edit">Edit Conversation</a></h3>
+        <h3><a class="edit" href="/conversations/<%=conversation.id%>/edit">Edit</a></h3>
       </div>
       <br>
       <br>
       <form action="/conversations/<%=conversation.id%>/delete" method="post">
         <input type="hidden" name="_method" value="DELETE">
-        <input class="delete" type="submit" name="Delete" value="Delete Conversation">
+        <input class="delete" type="submit" name="Delete" value="Delete">
       </form>
       <div class="message-content">
         <a href="/conversations/<%=conversation.id%>"><%= conversation.name %></a>
