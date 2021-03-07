@@ -5,6 +5,9 @@
       <h3>You Have no Conversations :( <a href="/conversations/new">Start One Now!!</a></h3>
   </div>
 <% else %>
+<% if flash[:message] %>
+  <h3 class="flash"><%= flash[:message] %></h3>
+<% end %>
   <% @conversations.each do |conversation| %>
     <div class="message">
       <div class="message-content">
