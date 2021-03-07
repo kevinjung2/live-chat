@@ -1,34 +1,29 @@
 class MessagesController < ApplicationController
 
-  # GET: /messages/new -sends a new message
-  get "/messages/new" do
-    erb :"/messages/new.html"
-  end
-
   # POST: /messages -posts new message created in /messages/new
   post "/messages" do
+    redirect_if_not_logged_in
     convo = Conversation.find_by(id: params[:conversation])
     user = User.find_by(id: session[:user_id])
     if params[:user].to_i != session[:user_id]
       flash[:message] = "You can only send messages from yourself!"
-      redirect :"/conversations/#{convo.id}"
     elsif !convo || !convo.users.include?(user)
       flash[:message] = "You can only send messages to conversations youre apart of!"
       redirect :"/users/#{session[:user_id]}"
     elsif params[:message] == ""
       flash[:message] = "You cannot send a blank message!"
-      redirect :"/conversations/#{convo.id}"
     else
       message = Message.create(content: params[:message])
       message.user = user
       message.conversation = convo
       message.save
-      redirect :"conversations/#{convo.id}"
     end
+    redirect :"conversations/#{convo.id}"
   end
 
   # GET: /messages/5/edit -allows the user to edit message they have already sent
   get "/messages/:id/edit" do
+    redirect_if_not_logged_in
     @message = Message.find_by(id: params[:id])
     if @message.user == current_user
       erb :"/messages/edit"

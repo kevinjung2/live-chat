@@ -61,6 +61,7 @@ class ConversationsController < ApplicationController
 
   # GET: /conversations/5/edit -shows the form to allow removal or addition of users to a conversation
   get "/conversations/:id/edit" do
+    redirect_if_not_logged_in
     @convo = Conversation.find_by(id: params[:id])
     @members = @convo.users
     if @members.include?(current_user)

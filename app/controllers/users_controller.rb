@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   # GET: /users -friends page
   get "/users" do
+    redirect_if_not_logged_in
     @user = current_user
     @friends = @user.followers
     erb :"/users/index"
@@ -24,6 +25,7 @@ class UsersController < ApplicationController
 
   # GET: /users/new -also known as signup
   get "/users/new" do
+    redirect_if_logged_in
     erb :"/users/new"
   end
 
