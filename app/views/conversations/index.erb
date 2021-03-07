@@ -10,6 +10,15 @@
 <% end %>
   <% @conversations.each do |conversation| %>
     <div class="message">
+      <div class="button">
+        <h3><a class="edit" href="/conversations/<%=conversation.id%>/edit">Edit Conversation</a></h3>
+      </div>
+      <br>
+      <br>
+      <form action="/conversations/<%=conversation.id%>/delete" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <input class="delete" type="submit" name="Delete" value="Delete Conversation">
+      </form>
       <div class="message-content">
         <a href="/conversations/<%=conversation.id%>"><%= conversation.name %></a>
       </div>
@@ -21,13 +30,7 @@
       <div class="message-time">
         <%= conversation.updated_at if conversation.updated_at %>
       </div>
-      <a class="left-pannel" href="/conversations/<%=conversation.id%>/edit">Edit Conversation</a>
-      <form action="/conversations/<%=conversation.id%>/delete" method="post">
-        <input type="hidden" name="_method" value="DELETE">
-        <div class="right-pannel">
-          <input type="submit" name="Delete" value="Delete Conversation">
-        </div>
-      </form>
+
     </div>
   <% end %>
 <% end %>
