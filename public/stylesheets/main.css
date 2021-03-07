@@ -297,6 +297,10 @@
     padding: 0;
   }
 
+  h3.flash {
+    color: red;
+  }
+
  .add {
    position: relative;
    float: right;

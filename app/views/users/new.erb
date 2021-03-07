@@ -1,15 +1,22 @@
 <h1>Welcome to LiveChat.</h1>
 <h2>Sign up below!</h2>
-<h3>It's free and doesn't even require and email!</h3>
 
-<form action="/users" method="post">
-  <label for="username">Choose a Username:</label>
-  <br>
-  <input type="text" name="username">
-  <br>
-  <label for="password">Choose a Password:</label>
-  <br>
-  <input type="password" name="password">
-  <br>
-  <input type="submit" name="Sign Up">
-</form>
+<div class="center-window">
+  <h3>It's free and doesn't even require and email!</h3>
+
+  <% if flash[:message] %>
+    <h3 class="flash"><%= flash[:message] %></h3>
+  <% end %>
+  
+  <form action="/users" method="post">
+    <label for="username">Choose a Username:</label>
+    <br>
+    <input type="text" name="username">
+    <br>
+    <label for="password">Choose a Password:</label>
+    <br>
+    <input type="password" name="password">
+    <br>
+    <input type="submit" name="Sign Up">
+  </form>
+</div>
