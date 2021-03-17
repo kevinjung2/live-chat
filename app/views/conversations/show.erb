@@ -1,13 +1,19 @@
 <h1 id="message-header"><%=@convo.name%></h1>
+
+<!-- shows flash messages if there are any -->
 <% if flash[:message] %>
   <h3 class="flash"><%= flash[:message] %></h3>
 <% end %>
+
 <br>
+
+<!-- displays each message in the current conversation -->
 <div id="message-thread">
   <% @messages.each do |message| %>
     <div class="message">
       <div class="message-content"><%= message.content %></div>
       <div class="message-user">
+        <!-- if the message is from current user than the username will diplay as "Me" and there will be buttons to edit/delete the message -->
         <% if message.user == @user %>
           <div class="button">
             <h3><a class="edit" href="/messages/<%=message.id%>/edit">Edit</a></h3>
@@ -32,6 +38,8 @@
     <br>
   <% end %>
 </div>
+
+<!-- message bar(form) acts similarly to what would be expected of the new message view file -->
 <form class="new-message" action="/messages" method="post">
   <input type="hidden" name="user" value="<%=@user.id%>">
   <input type="hidden" name="conversation" value="<%=@convo.id%>">
