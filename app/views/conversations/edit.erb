@@ -1,10 +1,15 @@
 <h1>Edit <%=@convo.name%></h1>
 
 <div class="center-window">
+
+  <!-- shows flash messages if there are any -->
   <% if flash[:message] %>
     <h3 class="flash"><%= flash[:message] %></h3>
   <% end %>
+
+  <!-- renders the form to edit a conversation -->
   <form action="/conversations/<%=@convo.id%>" method="post">
+    <!-- uses method override to send a patch request instead of a post -->
     <input type="hidden" name="_method" value="PATCH">
     <h3>Conversation Name: </h3>
     <br>
