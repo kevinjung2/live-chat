@@ -1,9 +1,14 @@
 <br>
 <br>
+
 <div class="center-window">
+
+  <!-- shows flash messages if there are any -->
   <% if flash[:message] %>
     <h3 class="flash"><%= flash[:message] %></h3>
   <% end %>
+
+  <!-- renders form to edit a message -->
   <h2>Edit Message: </h2>
   <form action="/messages/<%=@message.id%>" method="post">
     <input type="hidden" name="_method" value="PATCH">
