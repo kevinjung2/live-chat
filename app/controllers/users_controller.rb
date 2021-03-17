@@ -63,17 +63,7 @@ class UsersController < ApplicationController
       erb :'users/not_friends'
     end
   end
-
-  # GET: /users/5/edit -edit profile
-  get "/users/:id/edit" do
-    erb :"/users/edit.html"
-  end
-
-  # PATCH: /users/5 -patches changes made to a profile from /users/:id/edit
-  patch "/users/:id" do
-    redirect "/users/:id"
-  end
-
+  
   # DELETE: /users/5/delete - removes a user(can only be done by the logged in user)
   delete "/users/:id/delete" do
     if current_user == User.find_by(id: params[:id])
