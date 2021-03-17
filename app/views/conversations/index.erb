@@ -1,37 +1,48 @@
 <h1><%=@user.username%>'s Conversations.</h1>
 <br>
+
+<!-- shows flash messages if there are any -->
+<% if flash[:message] %>
+  <h3 class="flash"><%= flash[:message] %></h3>
+<% end %>
+
+
+<!-- Renders a message that you have no conversations if you don't and a link to start a new one. -->
 <% if @conversations.size == 0 %>
   <div class="center-window">
       <h3>You Have no Conversations :( <a href="/conversations/new">Start One Now!!</a></h3>
   </div>
 <% else %>
-<% if flash[:message] %>
-  <h3 class="flash"><%= flash[:message] %></h3>
-<% end %>
   <div class="center-window">
+    <!-- link to create a new converstaion -->
     <h3>Start a new conversation <a href="/conversations/new">Here.</a></h3>
   </div>
   <br>
   <br>
   <% @conversations.each do |conversation| %>
     <div class="message">
+      <!-- link to edit a conversation -->
       <div class="button">
         <h3><a class="edit" href="/conversations/<%=conversation.id%>/edit">Edit</a></h3>
       </div>
       <br>
       <br>
+      <!-- form to delete a conversation -->
       <form action="/conversations/<%=conversation.id%>/delete" method="post">
         <input type="hidden" name="_method" value="DELETE">
         <input class="delete" type="submit" name="Delete" value="Delete">
       </form>
+      <!-- link to view a conversations show page -->
       <div class="message-content">
         <a href="/conversations/<%=conversation.id%>"><%= conversation.name %></a>
       </div>
+      <!-- displays the most recent message on the conversation banner -->
       <% if conversation.messages.size > 0 %>
         <div class="last-message">
           <%= conversation.messages.last.content %>
         </div>
       <% end %>
+      <!-- displays the most recent conversation update time on the conversation banner -->
       <div class="message-time">
         <%= conversation.updated_at if conversation.updated_at %>
       </div>
