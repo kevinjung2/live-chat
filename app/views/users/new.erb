@@ -1,13 +1,16 @@
+<!-- this is the user signup page -->
+
 <h1>Welcome to LiveChat.</h1>
 <h2>Sign up below!</h2>
 
 <div class="center-window">
   <h3>It's free and doesn't even require and email!</h3>
 
+  <!-- shows flash messages if there are any -->
   <% if flash[:message] %>
     <h3 class="flash"><%= flash[:message] %></h3>
   <% end %>
-  
+
   <form action="/users" method="post">
     <label for="username">Choose a Username:</label>
     <br>
