@@ -1,4 +1,8 @@
+<!-- index page acts as a friends list and shows only the users that are friends with current user -->
+
 <h1> <%= @user.username %>'s Friends: </h1>
+
+<!-- shows a special message if current user has not friends :( -->
 <% if @friends.size == 0 %>
   <h2>looks like there's no one here right now :(. Add a friend Below!</h2>
 <% else %>
@@ -12,6 +16,8 @@
 <% end %>
 <br>
 <br>
+
+<!-- renders form to add a new friend -->
 <div class="right-window">
   <h2>Add a New Friend:</h2>
 
